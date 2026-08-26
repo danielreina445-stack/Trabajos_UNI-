@@ -1,0 +1,130 @@
+import java.util.Scanner;
+
+public class CalculadoraAreasVolumenes {
+   static Scanner sc;
+   static {
+      sc = new Scanner(System.in);
+   }
+   public CalculadoraAreasVolumenes() {
+   }
+   public static void main(String[] args) {
+      boolean salir = false;
+      while(!salir) {
+         System.out.println("\n===== MENÚ PRINCIPAL =====");
+         System.out.println("1. Calcular Área");
+         System.out.println("2. Calcular Volumen");
+         System.out.println("3. Salir");
+         int opcion = leer_Entero("Elige una opción: ");
+         switch (opcion) {
+            case 1:
+               menu_Areas();
+               break;
+            case 2:
+               menu_Volumenes();
+               break;
+            case 3:
+               salir = true;
+               System.out.println("¡Hasta luego!");
+               break;
+            default:
+               System.out.println("Opción no válida, intenta de nuevo.");
+         }
+      }
+   }
+   static void menu_Areas() {
+      System.out.println("\n--- ÁREAS ---");
+      System.out.println("1. Cuadrado");
+      System.out.println("2. Triángulo");
+      System.out.println("3. Círculo");
+      System.out.println("4. Hexágono");
+      System.out.println("5. Volver al menú principal");
+      int opcion = leer_Entero("Elige una figura: ");
+      switch (opcion) {
+         case 1:
+            double lado = leer_Double("Ingresa el lado del cuadrado: ");
+            System.out.println("Área del cuadrado: " + area_Cuadrado(lado));
+            break;
+         case 2:
+            double base = leer_Double("Ingresa la base del triángulo: ");
+            double altura = leer_Double("Ingresa la altura del triángulo: ");
+            System.out.println("Área del triángulo: " + area_Triangulo(base, altura));
+            break;
+         case 3:
+            double radio = leer_Double("Ingresa el radio del círculo: ");
+            System.out.println("Área del círculo: " + area_Circulo(radio));
+            break;
+         case 4:
+            double ladoHex = leer_Double("Ingresa el lado del hexágono: ");
+            System.out.println("Área del hexágono: " + area_Hexagono(ladoHex));
+            break;
+         case 5:
+            return;
+         default:
+            System.out.println("Opción no válida.");
+      }
+   }
+   static void menu_Volumenes() {
+      System.out.println("\n--- VOLÚMENES ---");
+      System.out.println("1. Cubo");
+      System.out.println("2. Cilindro");
+      System.out.println("3. Esfera");
+      System.out.println("4. Volver al menú principal");
+      int opcion = leer_Entero("Elige una figura: ");
+      switch (opcion) {
+         case 1:
+            double lado = leer_Double("Ingresa el lado del cubo: ");
+            System.out.println("Volumen del cubo: " + volumen_Cubo(lado));
+            break;
+         case 2:
+            double radio = leer_Double("Ingresa el radio del cilindro: ");
+            double altura = leer_Double("Ingresa la altura del cilindro: ");
+            System.out.println("Volumen del cilindro: " + volumen_Cilindro(radio, altura));
+            break;
+         case 3:
+            double radioEsfera = leer_Double("Ingresa el radio de la esfera: ");
+            System.out.println("Volumen de la esfera: " + volumen_Esfera(radioEsfera));
+            break;
+         case 4:
+            return;
+         default:
+            System.out.println("Opción no válida.");
+      }
+   }
+   static double area_Cuadrado(double lado) {
+      return lado * lado;
+   }
+   static double area_Triangulo(double base, double altura) {
+      return base * altura / (double)2.0;
+   }
+   static double area_Circulo(double radio) {
+      return Math.PI * radio * radio;
+   }
+   static double area_Hexagono(double lado) {
+      return (double)3.0 * Math.sqrt((double)3.0) / (double)2.0 * lado * lado;
+   }
+   static double volumen_Cubo(double lado) {
+      return lado * lado * lado;
+   }
+   static double volumen_Cilindro(double radio, double altura) {
+      return Math.PI * radio * radio * altura;
+   }
+   static double volumen_Esfera(double radio) {
+      return 4.1887902047863905 * radio * radio * radio;
+   }
+   static int leer_Entero(String mensaje) {
+      System.out.print(mensaje);
+      while(!sc.hasNextInt()) {
+         System.out.print("Por favor ingresa un número entero válido: ");
+         sc.next();
+      }
+      return sc.nextInt();
+   }
+   static double leer_Double(String mensaje) {
+      System.out.print(mensaje);
+      while(!sc.hasNextDouble()) {
+         System.out.print("Por favor ingresa un número válido: ");
+         sc.next();
+      }
+      return sc.nextDouble();
+   }
+}
